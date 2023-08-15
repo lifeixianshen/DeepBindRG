@@ -30,11 +30,8 @@ np.set_printoptions(threshold=np.nan)
 
 def loadSplit(path):
     t = np.loadtxt(path,dtype=np.str)
-    t1= []        
-    for i in range(len(t)):
-        t1.append([int(x) for x in list(t[i])])               
-    output = np.array(t1)
-    return output
+    t1 = [[int(x) for x in list(t[i])] for i in range(len(t))]
+    return np.array(t1)
 
 def aucJ(true_labels, predictions):
     
@@ -44,7 +41,7 @@ def aucJ(true_labels, predictions):
     return auc
 
 def randomShuffle(X, Y):
-    idx = [t for t in range(X.shape[0])]
+    idx = list(range(X.shape[0]))
     random.shuffle(idx)
     X = X[idx]
     Y = Y[idx]
@@ -75,8 +72,7 @@ data_labels = []
 def loadlabel(path):
     base=os.path.basename(path)
     newname='all_data/'+ base[:4]+ '_label.dat'
-    t = np.loadtxt(newname,dtype=np.float)
-    return t
+    return np.loadtxt(newname,dtype=np.float)
 
 all_name=[]
 index=0

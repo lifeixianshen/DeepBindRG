@@ -47,12 +47,12 @@ Y_pred_m=[]
 Y_val_m=[]
 Y_vina_m=[]
 name_m=[]
-for i,value1 in   vina.items():
+for i,value1 in vina.items():
     for j,value2 in experiment.items():
         oldj=j
         j=j.replace('all_data/','')
         #print j,value1
-        if i[0:4]==j[0:4]:
+        if i[:4] == j[:4]:
             #print i,j 
             Y_vina_m.append(value1)
             Y_val_m.append(value2)
@@ -66,8 +66,10 @@ Y_vina_m=np.array(Y_vina_m)
 fw=open('out_list.csv','w')
 for i in range(Y_val_m.shape[0]):
      #print (Y_val_m[i], y_pred_m[i])
-     fw.write(str(name_m[i])+"  "+str(float(Y_val_m[i])) +"  "+ str(float(y_pred_m[i]))+ "  " +str(float(Y_vina_m[i])) )
-     fw.write('\n')
+    fw.write(
+        f"{str(name_m[i])}  {float(Y_val_m[i])}  {float(y_pred_m[i])}  {float(Y_vina_m[i])}"
+    )
+    fw.write('\n')
 
 
 
